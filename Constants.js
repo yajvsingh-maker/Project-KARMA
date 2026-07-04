@@ -105,24 +105,3 @@ const SESSION_COLUMNS = {
   LAST_ACTIVITY: 6
 
 };
-
-const MESSAGES = {
-
-  WELCOME_MESSAGE:
-`✅ Welcome to Project KARMA 👋
-
-Karmadevi Automated Response Mechanism Assistant
-
-Please enter your Employee ID.`,
-
-  MAIN_MENU(name) {
-    return `✅ Welcome ${name}
-
-1️⃣ New Purchase Request
-
-2️⃣ Track My Requests
-
-3️⃣ Help`;
-  }
-
-};

@@ -22,7 +22,7 @@ static dispatch(phoneNumber, message) {
 
             success:true,
 
-            reply: MESSAGES.WELCOME_MESSAGE
+            reply: MESSAGES.WELCOME
 
         };
 
