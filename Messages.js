@@ -1,0 +1,46 @@
+/**
+ * ==========================================================
+ * Project KARMA
+ * Messages.gs
+ * ==========================================================
+ */
+
+const MESSAGES = {
+
+  WELCOME:
+
+`✅ Welcome to Project KARMA 👋
+
+Karmadevi Automated Response Mechanism Assistant
+
+Please enter your Employee ID.`,
+
+  ASK_DOB:
+
+"Please enter your Date of Birth (DD/MM/YYYY).",
+
+  INVALID_EMPLOYEE:
+
+"❌ Employee ID not found.\n\nPlease try again.",
+
+  INVALID_DOB:
+
+"❌ Incorrect Date of Birth.\n\nPlease try again.",
+
+  INACTIVE_EMPLOYEE:
+
+"Your employee account is inactive.\nPlease contact HR.",
+
+  MAIN_MENU(name){
+
+return `✅ Welcome ${name}
+
+1️⃣ New Purchase Request
+
+2️⃣ Track My Requests
+
+3️⃣ Help`;
+
+  }
+
+};
