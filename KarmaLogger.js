@@ -16,14 +16,15 @@ class KarmaLogger {
    */
   static info(event, details) {
 
-    Logger.log("[INFO] " + message);
+    Logger.log("[LOG_LEVELS.INFO] [" + event + "] " + details);
 
     Repository.appendRow(
       SHEETS.APPLICATION_LOG,
       [
         new Date(),
-        "INFO",
-        message
+        LOG_LEVELS.INFO,
+        event,
+        details
       ]
     );
 
@@ -34,14 +35,15 @@ class KarmaLogger {
    */
   static warning(event, details) {
 
-    Logger.log("[WARN] " + message);
+    Logger.log("[LOG_LEVELS.WARNING] [" + event + "] " + details);
 
     Repository.appendRow(
       SHEETS.APPLICATION_LOG,
       [
         new Date(),
-        "WARN",
-        message
+        LOG_LEVELS.WARNING,
+        event,
+        details
       ]
     );
 
@@ -53,16 +55,17 @@ class KarmaLogger {
   static error(event, details) {
 
     const message =
-      (error instanceof Error)
-        ? error.message
-        : error;
+      (details instanceof Error)
+        ? details.message
+        : details;
 
-    Logger.log("[ERROR] " + message);
+    Logger.log("[LOG_LEVELS.ERROR] [" + event + "] " + message);
 
     Repository.appendRow(
       SHEETS.ERROR_LOG,
       [
         new Date(),
+        event,
         message
       ]
     );

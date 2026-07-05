@@ -139,3 +139,19 @@ const EVENTS = {
   PURCHASE_REQUEST_CREATED: "PURCHASE_REQUEST_CREATED"
 
 };
+
+/**
+ * ==========================================================
+ * Log Levels
+ * ==========================================================
+ */
+
+const LOG_LEVELS = {
+
+  INFO: "INFO",
+
+  WARNING: "WARNING",
+
+  ERROR: "ERROR"
+
+};
