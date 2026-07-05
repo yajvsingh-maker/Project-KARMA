@@ -570,3 +570,21 @@ function testGlobalCommandLogoutBeforeAuthentication() {
   Logger.log("✅ Global logout before authentication test passed.");
 
 }
+
+function testWhatsAppConfiguration() {
+
+  if (!WHATSAPP.API_VERSION) {
+    throw new Error("Missing Script Property: WHATSAPP_API_VERSION");
+  }
+
+  if (!WHATSAPP.PHONE_NUMBER_ID) {
+    throw new Error("Missing Script Property: WHATSAPP_PHONE_NUMBER_ID");
+  }
+
+  if (!WHATSAPP.ACCESS_TOKEN) {
+    throw new Error("Missing Script Property: WHATSAPP_ACCESS_TOKEN");
+  }
+
+  Logger.log("WhatsApp configuration loaded successfully.");
+
+}

@@ -1,11 +1,28 @@
+/**
+ * ==========================================================
+ * Project KARMA
+ * Config.js
+ * ==========================================================
+ */
 
+const SCRIPT_PROPERTIES =
+    PropertiesService.getScriptProperties();
 
 const WHATSAPP = {
 
-  API_VERSION: "v25.0",
+  API_VERSION:
+      SCRIPT_PROPERTIES.getProperty(
+          "WHATSAPP_API_VERSION"
+      ),
 
-  PHONE_NUMBER_ID: "1138648212673141",
+  PHONE_NUMBER_ID:
+      SCRIPT_PROPERTIES.getProperty(
+          "WHATSAPP_PHONE_NUMBER_ID"
+      ),
 
-  ACCESS_TOKEN: "EAAS0I8XcsXEBR2pyj7HMEgoMEc7iPXPLsdXJU9XTAj9mZCnFfakkb5dZA5B3dkKE4jqNcPWpcagjlrkmzri2sFSE1TUDsgHyoZADB1U18qeIqtqYBdpAcBt7ckZBbZBGr9FwPSTMGhAzVVV9sDZC7QDpzLxCGJkZCkn7rvZACPe6ia0eXX4lTV4T14c7QzCvIAZDZD"
+  ACCESS_TOKEN:
+      SCRIPT_PROPERTIES.getProperty(
+          "WHATSAPP_ACCESS_TOKEN"
+      )
 
 };
