@@ -391,4 +391,182 @@ function testWebAppSpreadsheet() {
 
 }
 
+function assertKarmaTest(condition, message) {
 
+  if (!condition) {
+
+    throw new Error(message);
+
+  }
+
+}
+
+function testGlobalCommandHelp() {
+
+  const result =
+    GlobalCommandHandler.handle(
+      {
+        phoneNumber: "919999999999",
+        message: COMMANDS.HELP,
+        session: null
+      }
+    );
+
+  assertKarmaTest(result.success === true, "Help command should succeed.");
+  assertKarmaTest(result.reply === MESSAGES.HELP, "Help reply mismatch.");
+
+  Logger.log("✅ Global help command test passed.");
+
+}
+
+function testGlobalCommandMenu() {
+
+  const session = {
+    employeeId: "EMP-000001",
+    employeeName: "Test Employee",
+    authenticated: true
+  };
+
+  const result =
+    GlobalCommandHandler.handle(
+      {
+        phoneNumber: "919999999999",
+        message: COMMANDS.MENU,
+        session: session
+      }
+    );
+
+  assertKarmaTest(result.success === true, "Menu command should succeed.");
+  assertKarmaTest(
+    result.reply === MESSAGES.MAIN_MENU(session.employeeName),
+    "Menu reply mismatch."
+  );
+
+  Logger.log("✅ Global menu command test passed.");
+
+}
+
+function testGlobalCommandCancel() {
+
+  const session = {
+    employeeId: "EMP-000001",
+    employeeName: "Test Employee",
+    authenticated: true
+  };
+
+  const result =
+    GlobalCommandHandler.handle(
+      {
+        phoneNumber: "919999999999",
+        message: COMMANDS.CANCEL,
+        session: session
+      }
+    );
+
+  assertKarmaTest(result.success === true, "Cancel command should succeed.");
+  assertKarmaTest(
+    result.reply === MESSAGES.MAIN_MENU(session.employeeName),
+    "Cancel reply mismatch."
+  );
+
+  Logger.log("✅ Global cancel command test passed.");
+
+}
+
+function testGlobalCommandLogout() {
+
+  const phone = "919999999999";
+  const session = {
+    employeeId: "EMP-000001",
+    authenticated: true
+  };
+
+  const result =
+    GlobalCommandHandler.handle(
+      {
+        phoneNumber: phone,
+        message: COMMANDS.LOGOUT,
+        session: session
+      }
+    );
+
+  assertKarmaTest(result.success === true, "Logout command should succeed.");
+  assertKarmaTest(
+    result.reply === MESSAGES.LOGOUT_SUCCESS,
+    "Logout reply mismatch."
+  );
+
+  Logger.log("✅ Global logout command test passed.");
+
+}
+
+function testGlobalCommandRestart() {
+
+  const phone = "919999999999";
+
+  const result =
+    GlobalCommandHandler.handle(
+      {
+        phoneNumber: phone,
+        message: COMMANDS.RESTART,
+        session: null
+      }
+    );
+
+  assertKarmaTest(result.success === true, "Restart command should succeed.");
+  assertKarmaTest(
+    result.reply === MESSAGES.RESTART_SUCCESS,
+    "Restart reply mismatch."
+  );
+
+  Logger.log("✅ Global restart command test passed.");
+
+}
+
+function testGlobalCommandMenuBeforeAuthentication() {
+
+  const result =
+    GlobalCommandHandler.handle(
+      {
+        phoneNumber: "919999999999",
+        message: COMMANDS.MENU,
+        session: null
+      }
+    );
+
+  assertKarmaTest(
+    result.success === false,
+    "Menu before authentication should fail."
+  );
+  assertKarmaTest(
+    result.reply === MESSAGES.AUTHENTICATION_REQUIRED,
+    "Menu before authentication reply mismatch."
+  );
+
+  Logger.log("✅ Global menu before authentication test passed.");
+
+}
+
+function testGlobalCommandLogoutBeforeAuthentication() {
+
+  const result =
+    GlobalCommandHandler.handle(
+      {
+        phoneNumber: "919999999999",
+        message: COMMANDS.LOGOUT,
+        session: null
+      }
+    );
+
+  assertKarmaTest(
+    result.success === false,
+    "Logout before authentication should fail."
+  );
+  assertKarmaTest(
+    result.reply === MESSAGES.AUTHENTICATION_REQUIRED,
+    "Logout before authentication reply mismatch."
+  );
+
+  Logger.log("✅ Global logout before authentication test passed.");
+
+}

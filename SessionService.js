@@ -55,12 +55,43 @@ class SessionService {
 
   }
 
+  static getEmployeeName(session){
+
+      if (session.employeeName) {
+
+          return session.employeeName;
+
+      }
+
+      const employee =
+          Repository.findEmployeeById(session.employeeId);
+
+      return employee
+          ? employee.employeeName
+          : session.employeeId;
+
+  }
+
   /**
    * Close session
    */
   static end(phoneNumber){
 
       Repository.deleteSession(phoneNumber);
+
+  }
+
+  static logout(phoneNumber){
+
+      Repository.deleteSession(phoneNumber);
+
+  }
+
+  static restart(phoneNumber){
+
+      Repository.deleteSession(phoneNumber);
+
+      return this.start(phoneNumber);
 
   }
 

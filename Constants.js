@@ -53,6 +53,20 @@ const WORKFLOWS = {
 
 };
 
+const COMMANDS = {
+
+  HELP: "help",
+
+  MENU: "menu",
+
+  LOGOUT: "logout",
+
+  RESTART: "restart",
+
+  CANCEL: "cancel"
+
+};
+
 const SESSION={
 
 TIMEOUT:30

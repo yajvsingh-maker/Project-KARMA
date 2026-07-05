@@ -19,6 +19,30 @@ Please enter your Employee ID.`,
 
 "Please enter your Date of Birth (DD/MM/YYYY).",
 
+  HELP:
+
+`Available commands:
+
+help - Show available commands
+menu - Show main menu
+logout - End your session
+restart - Start again
+cancel - Return to main menu`,
+
+  LOGOUT_SUCCESS:
+
+"You have been logged out successfully.",
+
+  RESTART_SUCCESS:
+
+`Conversation restarted.
+
+Please enter your Employee ID.`,
+
+  AUTHENTICATION_REQUIRED:
+
+"Please authenticate first by entering your Employee ID.",
+
   INVALID_EMPLOYEE:
 
 "❌ Employee ID not found.\n\nPlease try again.",

@@ -14,6 +14,21 @@ static dispatch(phoneNumber, message) {
     let session =
         SessionService.get(phoneNumber);
 
+    const globalResponse =
+        GlobalCommandHandler.handle(
+          {
+            phoneNumber: phoneNumber,
+            message: message,
+            session: session
+          }
+        );
+
+    if (globalResponse) {
+
+        return globalResponse;
+
+    }
+
     if (!session) {
 
         SessionService.start(phoneNumber);
