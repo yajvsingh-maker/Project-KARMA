@@ -588,3 +588,56 @@ function testWhatsAppConfiguration() {
   Logger.log("WhatsApp configuration loaded successfully.");
 
 }
+
+/**
+ * ==========================================================
+ * Logger Tests
+ * ==========================================================
+ */
+
+function testLoggerInfo() {
+
+  KarmaLogger.info(
+    EVENTS.AUTH_SUCCESS,
+    "Employee EMP001 authenticated successfully."
+  );
+
+  Logger.log("PASS: KarmaLogger.info() executed successfully.");
+
+}
+
+
+function testLoggerWarning() {
+
+  KarmaLogger.warning(
+    EVENTS.AUTH_FAILED,
+    "Employee entered incorrect DOB."
+  );
+
+  Logger.log("PASS: KarmaLogger.warning() executed successfully.");
+
+}
+
+
+function testLoggerError() {
+
+  KarmaLogger.error(
+    EVENTS.AUTH_FAILED,
+    new Error("Invalid Employee ID.")
+  );
+
+  Logger.log("PASS: KarmaLogger.error() executed successfully.");
+
+}
+
+function testKarmaLogger() {
+
+  Logger.log("===== KARMA LOGGER TESTS =====");
+
+  testLoggerInfo();
+  testLoggerWarning();
+  testLoggerError();
+
+  Logger.log("===== ALL LOGGER TESTS PASSED =====");
+
+}

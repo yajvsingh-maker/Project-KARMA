@@ -14,7 +14,7 @@ class KarmaLogger {
   /**
    * Information messages
    */
-  static info(message) {
+  static info(event, details) {
 
     Logger.log("[INFO] " + message);
 
@@ -32,7 +32,7 @@ class KarmaLogger {
   /**
    * Warning messages
    */
-  static warn(message) {
+  static warning(event, details) {
 
     Logger.log("[WARN] " + message);
 
@@ -50,7 +50,7 @@ class KarmaLogger {
   /**
    * Error messages
    */
-  static error(error) {
+  static error(event, details) {
 
     const message =
       (error instanceof Error)
