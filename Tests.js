@@ -641,3 +641,124 @@ function testKarmaLogger() {
   Logger.log("===== ALL LOGGER TESTS PASSED =====");
 
 }
+
+/**
+ * ==========================================================
+ * Project KARMA
+ * Complete Regression Test Suite
+ * ==========================================================
+ */
+
+function runRegressionSuite() {
+
+  Logger.log("========================================");
+  Logger.log("PROJECT KARMA - REGRESSION TEST SUITE");
+  Logger.log("========================================");
+
+  // Configuration
+  testWhatsAppConfiguration();
+
+  // Repository
+  testRepository();
+  testFindEmployeeById();
+
+  // Authentication
+  testAuthenticationSuccess();
+  testAuthenticationWrongDOB();
+  testAuthenticationWrongEmployee();
+
+  // Session
+  testCreateSession();
+  testGetSession();
+  testUpdateState();
+  testAuthenticate();
+  testDeleteSession();
+
+  // Dispatcher
+  testDispatcher();
+  testDispatcherDOB();
+  testDispatcherMainMenu();
+
+  // Global Commands
+  testGlobalCommandHelp();
+  testGlobalCommandMenu();
+  testGlobalCommandCancel();
+  testGlobalCommandLogout();
+  testGlobalCommandRestart();
+  testGlobalCommandMenuBeforeAuthentication();
+  testGlobalCommandLogoutBeforeAuthentication();
+
+  // WhatsApp
+  testParsePayload();
+
+  // Logging
+  testLoggerInfo();
+  testLoggerWarning();
+  testLoggerError();
+
+  Logger.log("========================================");
+  Logger.log("ALL REGRESSION TESTS PASSED");
+  Logger.log("========================================");
+
+}
+
+function debug1() {
+  Logger.log("Start");
+  Repository.getSpreadsheet();
+  Logger.log("End");
+}
+
+function debug2() {
+  Logger.log("Start");
+  Repository.getSheet(SHEETS.AUDIT_LOG);
+  Logger.log("End");
+}
+
+function debug3() {
+  Logger.log("Start");
+  Repository.appendRow(
+    SHEETS.AUDIT_LOG,
+    [new Date(), "Hello"]
+  );
+  Logger.log("End");
+}
+
+function debug4() {
+  Logger.log("Start");
+  Repository.saveAuditLog("Test");
+  Logger.log("End");
+}
+
+function testWhatsAppConfiguration() {
+
+  Logger.log("API Version: " + WHATSAPP.API_VERSION);
+  Logger.log("Phone Number ID: " + WHATSAPP.PHONE_NUMBER_ID);
+  Logger.log("Access Token Present: " + (WHATSAPP.ACCESS_TOKEN ? "YES" : "NO"));
+
+}
+
+function debugConfig() {
+
+  Logger.log("Phone Number ID = " + WHATSAPP.PHONE_NUMBER_ID);
+
+  Logger.log("API Version = " + WHATSAPP.API_VERSION);
+
+}
+
+function debugScriptProperties() {
+
+  const props = PropertiesService.getScriptProperties();
+
+  Logger.log("WHATSAPP_API_VERSION      : " + props.getProperty("WHATSAPP_API_VERSION"));
+  Logger.log("WHATSAPP_PHONE_NUMBER_ID  : " + props.getProperty("WHATSAPP_PHONE_NUMBER_ID"));
+  Logger.log("WHATSAPP_ACCESS_TOKEN     : " + (props.getProperty("WHATSAPP_ACCESS_TOKEN") ? "Present" : "Missing"));
+
+  Logger.log("----------------------------------------");
+
+  Logger.log("WHATSAPP.API_VERSION      : " + WHATSAPP.API_VERSION);
+  Logger.log("WHATSAPP.PHONE_NUMBER_ID  : " + WHATSAPP.PHONE_NUMBER_ID);
+}
+
+function debugProject() {
+  Logger.log(ScriptApp.getScriptId());
+}

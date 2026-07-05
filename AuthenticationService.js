@@ -22,8 +22,9 @@ class AuthenticationService {
       // Employee not found
       if (!employee) {
 
-        KarmaLogger.warn(
-          `Authentication failed. Employee '${employeeId}' not found.`
+        KarmaLogger.warning(
+          EVENTS.AUTH_FAILED,
+          `Employee '${employeeId}' not found.`
         );
 
         return {
@@ -41,8 +42,9 @@ class AuthenticationService {
       // Employee inactive
       if (employee.status !== STATUS.ACTIVE) {
 
-        KarmaLogger.warn(
-          `Authentication failed. Employee '${employeeId}' is inactive.`
+        KarmaLogger.warning(
+          EVENTS.AUTH_FAILED,
+          `Employee '${employeeId}' is inactive.`
         );
 
         return {
@@ -60,8 +62,9 @@ class AuthenticationService {
       // DOB mismatch
       if (employee.dob !== enteredDOB) {
 
-        KarmaLogger.warn(
-          `Authentication failed. Invalid DOB for '${employeeId}'.`
+        KarmaLogger.warning(
+          EVENTS.AUTH_FAILED,
+          `Invalid DOB for employee '${employeeId}'.`
         );
 
         return {
@@ -79,7 +82,8 @@ class AuthenticationService {
       // Authentication successful
 
       KarmaLogger.info(
-        `Authentication successful for '${employeeId}'.`
+        EVENTS.AUTH_SUCCESS,
+        `Employee '${employeeId}' authenticated successfully.`
       );
 
       return {
@@ -97,7 +101,10 @@ class AuthenticationService {
     }
     catch (error) {
 
-      KarmaLogger.error(error);
+      KarmaLogger.error(
+        EVENTS.AUTH_FAILED,
+        error
+      );
 
       return {
 

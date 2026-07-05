@@ -21,10 +21,22 @@ class WhatsAppService {
     const value = payload.entry?.[0]?.changes?.[0]?.value;
 
     if (!value || !value.messages || value.messages.length === 0) {
+
+      KarmaLogger.warning(
+        EVENTS.WHATSAPP_INVALID_PAYLOAD,
+        "Webhook payload does not contain any WhatsApp messages."
+      );
+
       return null;
+
     }
 
     const message = value.messages[0];
+
+    KarmaLogger.info(
+      EVENTS.WHATSAPP_PAYLOAD_PARSED,
+      `Message received from ${message.from}`
+    );
 
     return {
 
@@ -88,23 +100,52 @@ class WhatsAppService {
         muteHttpExceptions: true
 
       };
+Repository.saveAuditLog("META URL : " + url);
+Repository.saveAuditLog("API VERSION : " + WHATSAPP.API_VERSION);
+      
+const response =
+  UrlFetchApp.fetch(url, options);
 
-      const response =
-        UrlFetchApp.fetch(url, options);
+const responseCode =
+  response.getResponseCode();
 
-      const result =
-        JSON.parse(response.getContentText());
+const responseBody =
+  response.getContentText();
 
-      KarmaLogger.info(
-        "WhatsApp message sent successfully."
-      );
+Repository.saveAuditLog(
+  "META RESPONSE : " +
+  responseCode +
+  " : " +
+  responseBody
+);
 
-      return result;
+const result =
+  JSON.parse(responseBody);
 
+if (responseCode >= 200 && responseCode < 300) {
+
+  KarmaLogger.info(
+    EVENTS.WHATSAPP_MESSAGE_SENT,
+    `Message sent successfully to ${phoneNumber}.`
+  );
+
+} else {
+
+  KarmaLogger.error(
+    EVENTS.WHATSAPP_MESSAGE_SEND_FAILED,
+    responseBody
+  );
+
+}
+
+return result;
     }
     catch (error) {
 
-      KarmaLogger.error(error);
+      KarmaLogger.error(
+        EVENTS.WHATSAPP_MESSAGE_SEND_FAILED,
+        error
+      );
 
       throw error;
 
